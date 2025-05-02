@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
-  order_id: String,
-  outlet_id: String,
-  customer_name: String,
-  phone: String,
-  address: String,
-  total_amount: Number,
+  order_id: { type: String, required: true },
+  store_id: { type: String, required: true },
+  customer_name: { type: String },
+  phone: { type: String },
+  address: { type: String },
+  total_amount: { type: Number },
   items: [
     {
       name: String,
@@ -14,8 +14,8 @@ const OrderSchema = new mongoose.Schema({
       price: Number
     }
   ],
-  placed_at: String,
-  headers: Object,
+  placed_at: { type: String },
+  headers: { type: Object },
   received_at: {
     type: Date,
     default: Date.now

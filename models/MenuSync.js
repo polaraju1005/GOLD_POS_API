@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const MenuSyncSchema = new mongoose.Schema({
-  outlet_id: String,
+  store_id: String,
   sync_status: String,
   timestamp: String,
   error_details: String,

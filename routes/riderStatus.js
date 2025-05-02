@@ -3,11 +3,20 @@ const router = express.Router();
 const RiderStatus = require('../models/RiderStatus');
 
 router.post('/rider-status', async (req, res) => {
+  const { store_id, order_id, status } = req.body;
+
+  if (!store_id || !order_id || !status) {
+    return res.status(400).json({
+      error: 'Missing required fields: store_id, order_id, or status'
+    });
+  }
+
   try {
     const update = new RiderStatus({
       ...req.body,
       headers: req.headers
     });
+
     await update.save();
     res.json({ status: 'rider status received' });
   } catch (err) {
