@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
+const validateApiKey = require('../middlewares/auth');
 
-router.post('/place', async (req, res) => {
+router.post('/place', validateApiKey, async (req, res) => {
   try {
     const { order_id, store_id, items } = req.body;
 
-    // Validate required fields
     if (!order_id || !store_id || !Array.isArray(items)) {
-      return res.status(400).json({ error: 'Missing required fields: order_id, store_id, or items' });
+      return res.status(400).json({
+        error: 'Missing required fields: order_id, store_id, or items'
+      });
     }
 
     const order = new Order({

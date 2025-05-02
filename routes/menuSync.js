@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const MenuSync = require('../models/MenuSync');
+const validateApiKey = require('../middlewares/auth');
 
-router.post('/menu-sync', async (req, res) => {
+router.post('/menu-sync', validateApiKey, async (req, res) => {
   try {
     const {
       store_id,

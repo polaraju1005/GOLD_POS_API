@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const OutletStatus = require('../models/OutletStatus');
+const validateApiKey = require('../middlewares/auth');
 
-router.post('/status', async (req, res) => {
+router.post('/status', validateApiKey, async (req, res) => {
   const { store_id, status } = req.body;
 
   if (!store_id || !status) {
